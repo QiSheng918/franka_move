@@ -145,31 +145,6 @@ void franka_emika::franka_setCollisionLimit()
   robot.automaticErrorRecovery();
 }
 
-
-
-
-int main(int argc,char **argv)
-{ 
-  ros::init(argc,argv,"test");
-//  ros::AsyncSpinner spinner(2);
-//  spinner.start();
-   std::cout<<"test";
-  franka_emika franka_robot;
-
- // franka_robot.start();
-
-  ros::waitForShutdown();
-//  spinner.stop();
-  return 0;
-
-  // ROS_INFO("it is a test");
-  // while(ros::ok()){}
-  // return 0;
-}
-
-
-
-
 void franka_emika::franka_FCI_backup()
 {
     setDefaultBehavior(robot);
@@ -205,3 +180,28 @@ void franka_emika::franka_FCI_backup()
        return CartesianV;
      });
   }
+
+
+
+int main(int argc,char **argv)
+{ 
+  ros::init(argc,argv,"test");
+  ros::AsyncSpinner spinner(2);
+  spinner.start();
+   std::cout<<"test";
+  franka_emika franka_robot;
+
+  franka_robot.start();
+
+  ros::waitForShutdown();
+  spinner.stop();
+  return 0;
+
+  // ROS_INFO("it is a test");
+  // while(ros::ok()){}
+  // return 0;
+}
+
+
+
+
