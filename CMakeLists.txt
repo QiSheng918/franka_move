@@ -133,6 +133,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
+  include ${catkin_INCLUDE_DIRS}
 # include
   ${catkin_INCLUDE_DIRS}
 # "/usr/include/eigen3"
@@ -180,3 +181,12 @@ add_dependencies(${PROJECT_NAME}_test_node ${PROJECT_NAME}_gencpp)
 target_link_libraries(${PROJECT_NAME}_test_node
   ${catkin_LIBRARIES} Franka::Franka examples_common
 )
+
+
+# add_library(franka_control
+#   src/franka_control.cpp
+# )
+# add_dependencies(franka_control ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# target_link_libraries(franka_control
+#   ${catkin_LIBRARIES}
+# )

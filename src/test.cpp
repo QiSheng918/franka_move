@@ -107,12 +107,18 @@ void franka_emika::franka_FCI()
    double kRadius=0.2;
    std::array<double, 16> initial_pose;
    double time = 0.0;
+   ros::Time time_now=ros::Time::now();
    franka::CartesianVelocities CartesianV{{0,0,0,0,0,0}};
-   robot.control([&time, &initial_pose, &kRadius,&CartesianV]
+   robot.control([&time, &initial_pose, &kRadius,&CartesianV,&time_now]
                  (const franka::RobotState& robot_state, franka::Duration period)->franka::CartesianVelocities
    {
      time+=period.toSec();
-     std::cout<<period.toMSec();
+     std::cout<<period.toMSec()<<std::endl;
+     std::cout<<"it is running"<<std::endl;
+     ros::Time time_last=time_now;
+     ros::Time time_now=ros::Time::now();
+     double t=time_now.toSec()-time_last.toSec();
+     std::cout<<t<<std::endl;
      CartesianV.O_dP_EE={{0, 0.0, 0.0, 0, 0, 0}};
      return CartesianV;
 //     for(int i=0;i<7;i++)  std::cout<<robot_state.q[i];

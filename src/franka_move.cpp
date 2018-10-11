@@ -94,7 +94,7 @@ void franka_emika::start()
 
 void franka_emika::franka_FCI()
 {
-  setDefaultBehavior(robot);
+ // setDefaultBehavior(robot);
   this->franka_setCollisionLimit();
   std::array<double, 7> q_goal = {{0, 0, 0, 0, 0, 0, 0}};
   MotionGenerator motion_generator(0.05, q_goal);
@@ -104,7 +104,7 @@ void franka_emika::franka_FCI()
   std::cin.ignore();
 // robot.control(motion_generator);
   std::cout << "Finished moving to initial joint configuration." << std::endl;
-
+   ros::Duration(10).sleep();
    double kRadius=0.2;
    std::array<double, 16> initial_pose;
    double time = 0.0;
@@ -125,6 +125,7 @@ void franka_emika::franka_FCI()
 
 void franka_emika::franka_setCollisionLimit()
 {
+  setDefaultBehavior(robot);
   std::array<double, 7> lower_torque_thresholds_nominal{
     {25.0, 25.0, 22.0, 20.0, 19.0, 17.0, 14.}};
   std::array<double, 7> upper_torque_thresholds_nominal{
